@@ -17,7 +17,7 @@ const localLogin = new LocalStrategy(
         const emailres = await db.executeQuery(pool,`SELECT id_int,email_Vch as email,password_vch as password from test.user where email_vch='${email}'`);
         console.log(emailres[0][0]);
         
-        if(emailres[0]){
+        if(emailres[0][0]){
           if(emailres[0][0].password === password)
             return done(null,emailres[0][0], {message:"successfully verified"});
           else
@@ -45,9 +45,9 @@ const jwtOptions = {
 };
   
 const decodeJWT = new JwtStrategy(jwtOptions,function(payload,done){
-    console.log('inside JwtStrategy');
-    console.log(payload);
-    console.log('injwtLogin')
+    // console.log('inside JwtStrategy');
+    // console.log(payload);
+    // console.log('injwtLogin')
     return done(null, payload);
 });
 
